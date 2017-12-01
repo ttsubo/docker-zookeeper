@@ -1,0 +1,6 @@
+# Encoding
+defencodig utf-8
+
+# Show date and screen list
+hardstatus alwayslastline '%{= kw}%02c:%s %{= .c}%H %L=%{= .y}%-w%46>%{= .bw}%n %t*%{= .y}%+w%-16=%{= .y}[%l]'
+

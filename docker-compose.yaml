@@ -1,0 +1,49 @@
+version: '2'
+services:
+  zookeeper-1-server:
+    image: zookeeper:3.4.9
+    ports:
+      - 2181:2181
+    environment:
+      ZOO_MY_ID: 1
+      ZOO_SERVERS: server.1=zookeeper-1-server:2888:3888 server.2=zookeeper-2-server:2888:3888 server.3=zookeeper-3-server:2888:3888
+    container_name: zookeeper-1-server
+    hostname: zookeeper-1-server
+
+  zookeeper-2-server:
+    image: zookeeper:3.4.9
+    ports:
+      - 2182:2181
+    environment:
+      ZOO_MY_ID: 2
+      ZOO_SERVERS: server.1=zookeeper-1-server:2888:3888 server.2=zookeeper-2-server:2888:3888 server.3=zookeeper-3-server:2888:3888
+    container_name: zookeeper-2-server
+    hostname: zookeeper-2-server
+
+  zookeeper-3-server:
+    image: zookeeper:3.4.9
+    ports:
+      - 2183:2181
+    environment:
+      ZOO_MY_ID: 3
+      ZOO_SERVERS: server.1=zookeeper-1-server:2888:3888 server.2=zookeeper-2-server:2888:3888 server.3=zookeeper-3-server:2888:3888
+    container_name: zookeeper-3-server
+    hostname: zookeeper-3-server
+
+  sample-1-zookeeper:
+    image: sample_zookeeper
+    tty: true
+    environment:
+      ZOOKEEPER_SERVERS: zookeeper-1-server:2181,zookeeper-2-server:2181,zookeeper-3-server:2181
+      SHELL: /bin/bash
+    container_name: sample-1-zookeeper
+    hostname: sample-1-zookeeper
+
+  sample-2-zookeeper:
+    image: sample_zookeeper
+    tty: true
+    environment:
+      ZOOKEEPER_SERVERS: zookeeper-1-server:2181,zookeeper-2-server:2181,zookeeper-3-server:2181
+      SHELL: /bin/bash
+    container_name: sample-2-zookeeper
+    hostname: sample-2-zookeeper
